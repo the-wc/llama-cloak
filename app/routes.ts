@@ -9,6 +9,6 @@ export default [
   index("routes/home.tsx"),
   ...prefix("api", [
     route("/send", "./routes/api.send.tsx"),
-    route("/receive", "./routes/api.receive.tsx"),
+    route("/chat/subscribe", "./routes/api.chat.subscribe.tsx"),
   ]),
 ] satisfies RouteConfig;

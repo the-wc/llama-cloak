@@ -1,3 +1,4 @@
+import { CheckCircle2 } from "lucide-react";
 import { ChatHeader } from "./chat-header";
 import { ChatInput } from "./chat-input";
 import { ChatMessages } from "./chat-messages";
@@ -17,6 +18,11 @@ export function Gui() {
         <p className="text-xs text-muted-foreground text-nowrap">
           Using <span className="font-mono underline">llama 3.2</span>.
         </p>
+        <div className="grow" />
+        <div className="text-xs flex gap-x-2 items-center tracing-wide font-mono text-emerald-600">
+          <p>Online</p>
+          <CheckCircle2 className="size-4" />
+        </div>
       </div>
     </>
   );

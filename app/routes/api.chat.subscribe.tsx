@@ -1,27 +1,23 @@
 import { eventStream } from "remix-utils/sse/server";
 
-import type { Route } from "./+types/api.receive";
+import type { Route } from "./+types/api.chat.subscribe";
 import { LlamaClient } from "~/.server/llama-client";
 import { emitter } from "~/.server/emitter";
+import type { OllamaResponseChunk } from "~/lib/utils";
 
 export async function loader({ request }: Route.ActionArgs) {
   return eventStream(request.signal, (send) => {
     async function handle(prompt: string) {
       try {
-        const stream = await LlamaClient.chat(prompt ?? "");
+        const stream = await LlamaClient.chat(prompt);
         stream.on("data", (buffer: Buffer) => {
           try {
-            const chunk: ResponseChunk = JSON.parse(buffer.toString());
-            console.log(chunk);
+            const chunk: OllamaResponseChunk = JSON.parse(buffer.toString());
             send({
               event: "api-chat",
               data: JSON.stringify(chunk),
             });
-
-            if (chunk.done) {
-              // stream.destroy();
-            }
-            // console.log(jsonData.response); // Process the response text
+            if (chunk.done) stream.destroy();
           } catch (error) {
             console.error("Error parsing JSON:", (error as Error).message);
           }
@@ -42,9 +38,3 @@ export async function loader({ request }: Route.ActionArgs) {
     };
   });
 }
-type ResponseChunk = {
-  model: string;
-  created_at: string;
-  response: string;
-  done: boolean;
-};
