@@ -1,13 +1,19 @@
+import { Gui } from "~/gui/gui";
 import type { Route } from "./+types/home";
-import { Welcome } from "../welcome/welcome";
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "New React Router App" },
-    { name: "description", content: "Welcome to React Router!" },
+    { title: "AI Gui" },
+    { name: "description", content: "A local gui for using LLM work." },
   ];
 }
 
 export default function Home() {
-  return <Welcome />;
+  return (
+    <div className="flex flex-col min-h-[90vh] items-center justify-center w-full font-sans tracking-tight">
+      <div className="grow" />
+      <Gui />
+      <div className="grow" />
+    </div>
+  );
 }
