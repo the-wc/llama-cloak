@@ -29,7 +29,10 @@ export function AppSidebar() {
             <SidebarMenu>
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
+                  <SidebarMenuButton
+                    isActive={true}
+                    asChild
+                  >
                     <a href={item.url}>
                       <span>{item.title}</span>
                     </a>

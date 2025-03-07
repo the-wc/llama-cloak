@@ -3,7 +3,7 @@ import type { Route } from "./+types/home";
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "AI Gui" },
+    { title: "llama-cloak" },
     { name: "description", content: "A local gui for using LLM work." },
   ];
 }
